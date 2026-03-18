@@ -154,7 +154,7 @@ You should see: `- Local: http://localhost:3000`
 
 Open http://localhost:3000 in your browser.
 
-You should see: A heading "Hackathon" and a list showing Alice (0.92), Bob (0.67), Charlie (0.85).
+You should see: A heading "Hackathon" with two sections. The first shows pre-computed predictions from the database (Alice, Bob, Charlie with scores). The second has an input and button for live ONNX predictions — enter a score, click Predict, and see the model's response.
 
 Verify the API:
 
@@ -190,7 +190,7 @@ mvn test
 You should see:
 
 ```
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 

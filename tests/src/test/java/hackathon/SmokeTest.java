@@ -66,6 +66,17 @@ public class SmokeTest {
             .body("label", equalTo("high"));
     }
 
+    @Test
+    public void homePageShowsBothMLPaths() {
+        given()
+        .when()
+            .get("/")
+        .then()
+            .statusCode(200)
+            .body(containsString("Pre-computed Predictions"))
+            .body(containsString("Live ONNX Prediction"));
+    }
+
     // ========================================================================
     // Example tests — uncomment and modify for your API endpoints
     // ========================================================================
