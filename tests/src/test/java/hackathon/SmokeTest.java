@@ -33,16 +33,6 @@ public class SmokeTest {
     }
 
     @Test
-    public void predictEndpointResponds() {
-        given()
-        .when()
-            .get("/api/predict")
-        .then()
-            .statusCode(200)
-            .body("status", equalTo("predict endpoint ready"));
-    }
-
-    @Test
     public void examplesEndpointReturnsData() {
         given()
         .when()
@@ -53,21 +43,30 @@ public class SmokeTest {
             .body("[0].name", equalTo("Alice"));
     }
 
+    @Test
+    public void predictEndpointShowsMethods() {
+        given()
+        .when()
+            .get("/api/predict")
+        .then()
+            .statusCode(200)
+            .body("methods", notNullValue());
+    }
+
+    @Test
+    public void canGetLivePrediction() {
+        given()
+            .contentType("application/json")
+            .body("{\"score\": 0.9}")
+        .when()
+            .post("/api/predict")
+        .then()
+            .statusCode(200)
+            .body("prediction", equalTo(1))
+            .body("label", equalTo("high"));
+    }
+
     // ========================================================================
     // Example tests — uncomment and modify for your API endpoints
     // ========================================================================
-
-    // @Test
-    // public void postPrediction() {
-    //     String body = "{\"features\": [1.0, 2.5, 3.0]}";
-    //
-    //     given()
-    //         .contentType("application/json")
-    //         .body(body)
-    //     .when()
-    //         .post("/api/predict")
-    //     .then()
-    //         .statusCode(200)
-    //         .body("prediction", notNullValue());
-    // }
 }

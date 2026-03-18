@@ -19,7 +19,7 @@ The entire system connects through one file: `app.db` at the repo root. It's a S
 
 The data flows in one direction. The Data Engineer creates tables and generates synthetic data, writing `app.db`. The Data Scientist reads `app.db` from Jupyter, trains models, and outputs predictions as CSV or ONNX. The Data Engineer loads those predictions back into `app.db`. The Fullstack Engineer's app reads `app.db` and serves it through pages and API routes. The QA Engineer tests those API routes with REST Assured.
 
-ML integration has two paths. Pre-computed predictions: the Data Scientist outputs a CSV, the Data Engineer loads its rows into `app.db`, and the app queries them like normal data. Live inference: the Data Scientist exports a model to ONNX format, and the Fullstack Engineer loads the `.onnx` file in a Next.js API route using `onnxruntime-node` for real-time predictions. Pre-computed is simpler. Live inference is more impressive for demos.
+ML integration has two paths. Pre-computed predictions: the Data Scientist outputs a CSV, the Data Engineer loads its rows into `app.db`, and the app queries them like normal data. Live inference: the Data Scientist exports a model to ONNX format, and the Fullstack Engineer loads the `.onnx` file in a Next.js API route using `onnxruntime-node` for real-time predictions. Pre-computed is simpler. Live inference is more impressive for demos. Both paths are demonstrated in this template — pre-computed predictions are in the `/api/examples` endpoint, and live ONNX inference is in the `POST /api/predict` endpoint.
 
 The only coordination required: the team agrees on the database schema (table names, column names, types) at kickoff. That's a 15-minute conversation. After that, everyone works independently in their folder.
 
@@ -66,11 +66,14 @@ hackathon/
 │           └── datasource.ts
 ├── data/                         ← Data Engineer + Data Scientist (Python)
 │   ├── requirements.txt
+│   ├── MODEL_CONTRACT.md
 │   ├── scripts/
 │   │   ├── setup_db.py
-│   │   └── modeling.py
+│   │   ├── modeling.py
+│   │   └── train_model.py
 │   ├── notebooks/
 │   └── models/
+│       └── model.onnx
 ├── tests/                        ← QA Engineer (Java/Maven)
 │   ├── pom.xml
 │   └── src/test/java/hackathon/
@@ -161,6 +164,16 @@ curl http://localhost:3000/api/examples
 
 You should see: A JSON array with 3 objects.
 
+Verify live predictions:
+
+```
+curl -X POST http://localhost:3000/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{"score": 0.9}'
+```
+
+You should see: `{"score":0.9,"prediction":1,"label":"high"}`
+
 *If the page shows no data, check that `app.db` exists at the repo root (one level above `app/`). If you get a native module error for better-sqlite3, make sure you have Node 18+ and C++ build tools installed.*
 
 **Keep the dev server running for Step 4.**
@@ -177,7 +190,7 @@ mvn test
 You should see:
 
 ```
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 

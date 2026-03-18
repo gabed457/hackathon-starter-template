@@ -1,11 +1,11 @@
 pandas>=2.0
 scikit-learn>=1.4
 jupyter>=1.0
+skl2onnx>=1.16
+onnxruntime>=1.17
 
 # Optional — uncomment as needed:
 # xgboost>=2.0          # gradient boosting (alternative to sklearn)
 # torch>=2.0            # deep learning
 # matplotlib>=3.8       # plotting
 # seaborn>=0.13         # statistical visualizations
-# skl2onnx>=1.16        # export sklearn models to ONNX format
-# onnxruntime>=1.17     # run ONNX models (used in modeling.py export)
