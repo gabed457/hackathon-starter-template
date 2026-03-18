@@ -1,0 +1,29 @@
+# NOTE: app.db is intentionally tracked. Do NOT add it to .gitignore.
+# It is the shared database that connects all team members.
+
+# === Next.js (app/) ===
+app/node_modules/
+app/.next/
+app/out/
+
+# === Python (data/) ===
+data/__pycache__/
+data/**/__pycache__/
+data/.ipynb_checkpoints/
+data/**/.ipynb_checkpoints/
+data/venv/
+data/.venv/
+
+# === Java/Maven (tests/) ===
+tests/target/
+tests/.idea/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
