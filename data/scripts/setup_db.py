@@ -24,16 +24,16 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "app.db")
 def create_tables(cursor):
     """Create tables in app.db. Column names must match TypeORM entities."""
 
-    # Example — uncomment and modify for your schema:
-    #
-    # cursor.execute("""
-    #     CREATE TABLE IF NOT EXISTS examples (
-    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #         name TEXT NOT NULL,
-    #         value REAL,
-    #         category TEXT
-    #     )
-    # """)
+    # Hello world table — replace with your own schema on day one
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS example (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            score REAL NOT NULL
+        )
+    """)
+
+    # Example — uncomment and modify for additional tables:
     #
     # cursor.execute("""
     #     CREATE TABLE IF NOT EXISTS predictions (
@@ -41,27 +41,24 @@ def create_tables(cursor):
     #         example_id INTEGER NOT NULL,
     #         predicted_label TEXT NOT NULL,
     #         confidence REAL,
-    #         FOREIGN KEY (example_id) REFERENCES examples(id)
+    #         FOREIGN KEY (example_id) REFERENCES example(id)
     #     )
     # """)
-
-    pass
 
 
 def generate_data(cursor):
     """Insert synthetic data into tables."""
 
-    # Example — uncomment and modify:
-    #
-    # import random
-    # categories = ["A", "B", "C"]
-    # for i in range(100):
-    #     cursor.execute(
-    #         "INSERT INTO examples (name, value, category) VALUES (?, ?, ?)",
-    #         (f"item_{i}", round(random.uniform(0, 100), 2), random.choice(categories)),
-    #     )
-
-    pass
+    # Hello world data — replace with your own synthetic data on day one
+    rows = [
+        ("Alice", 0.92),
+        ("Bob", 0.67),
+        ("Charlie", 0.85),
+    ]
+    cursor.executemany(
+        "INSERT INTO example (name, score) VALUES (?, ?)",
+        rows,
+    )
 
 
 def load_predictions(cursor):

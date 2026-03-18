@@ -19,17 +19,14 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "model.onnx
 def load_data():
     """Load data from app.db into a DataFrame."""
 
-    # Example — uncomment and modify:
-    #
-    # import pandas as pd
-    # import sqlite3
-    #
-    # conn = sqlite3.connect(DB_PATH)
-    # df = pd.read_sql("SELECT * FROM examples", conn)
-    # conn.close()
-    # return df
+    import pandas as pd
+    import sqlite3
 
-    pass
+    conn = sqlite3.connect(DB_PATH)
+    df = pd.read_sql("SELECT * FROM example", conn)
+    conn.close()
+    print(df)
+    return df
 
 
 def train_model(df):
@@ -99,6 +96,7 @@ def save_onnx(model):
 
 if __name__ == "__main__":
     df = load_data()
+    print(f"Loaded {len(df)} rows from app.db")
     model = train_model(df)
     save_predictions(model, df)
     # save_onnx(model)  # Uncomment for Option B (live ONNX inference)

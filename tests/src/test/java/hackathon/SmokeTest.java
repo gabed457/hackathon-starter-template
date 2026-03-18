@@ -42,20 +42,20 @@ public class SmokeTest {
             .body("status", equalTo("predict endpoint ready"));
     }
 
+    @Test
+    public void examplesEndpointReturnsData() {
+        given()
+        .when()
+            .get("/api/examples")
+        .then()
+            .statusCode(200)
+            .body("size()", equalTo(3))
+            .body("[0].name", equalTo("Alice"));
+    }
+
     // ========================================================================
     // Example tests — uncomment and modify for your API endpoints
     // ========================================================================
-
-    // @Test
-    // public void getExamples() {
-    //     given()
-    //     .when()
-    //         .get("/api/examples")
-    //     .then()
-    //         .statusCode(200)
-    //         .body("size()", greaterThan(0))
-    //         .body("[0].name", notNullValue());
-    // }
 
     // @Test
     // public void postPrediction() {

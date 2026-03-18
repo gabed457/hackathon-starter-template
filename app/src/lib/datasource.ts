@@ -2,8 +2,7 @@ import "reflect-metadata";
 import path from "path";
 import { DataSource } from "typeorm";
 
-// Import your entities here:
-// import { Example } from "@/entities/Example";
+import { Example } from "@/entities/Example";
 
 const AppDataSource = new DataSource({
   type: "better-sqlite3",
@@ -11,8 +10,7 @@ const AppDataSource = new DataSource({
   synchronize: false, // The data engineer owns the schema. Flip to true temporarily if you need to iterate before the data engineer builds the database.
   logging: false,
   entities: [
-    // Add your entity classes here:
-    // Example,
+    Example,
   ],
 });
 
