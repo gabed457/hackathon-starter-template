@@ -154,25 +154,12 @@ You should see: `- Local: http://localhost:3000`
 
 Open http://localhost:3000 in your browser.
 
-You should see: A heading "Hackathon" with two sections. The first shows pre-computed predictions from the database (Alice, Bob, Charlie with scores). The second has an input and button for live ONNX predictions — enter a score, click Predict, and see the model's response.
+You should see: A heading "Hackathon" with two sections:
 
-Verify the API:
+1. **Pre-computed Predictions** — A list showing Alice (0.92), Bob (0.67), Charlie (0.85). These come from the database.
+2. **Live ONNX Prediction** — An input and button. Enter a score (e.g. 0.9), click Predict, and you should see `prediction: 1 (high)`. Try 0.3 and you should see `prediction: 0 (low)`. The threshold is around 0.75.
 
-```
-curl http://localhost:3000/api/examples
-```
-
-You should see: A JSON array with 3 objects.
-
-Verify live predictions:
-
-```
-curl -X POST http://localhost:3000/api/predict \
-  -H "Content-Type: application/json" \
-  -d '{"score": 0.9}'
-```
-
-You should see: `{"score":0.9,"prediction":1,"label":"high"}`
+Open your browser's Network tab to see the underlying API calls (`/api/examples` for pre-computed, `/api/predict` for live inference).
 
 *If the page shows no data, check that `app.db` exists at the repo root (one level above `app/`). If you get a native module error for better-sqlite3, make sure you have Node 18+ and C++ build tools installed.*
 
