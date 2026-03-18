@@ -177,7 +177,7 @@ mvn test
 You should see:
 
 ```
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
