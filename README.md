@@ -202,9 +202,13 @@ The full stack works. Data flows from Python → SQLite → Next.js → REST Ass
 
 ## Viewing the Database
 
-Anyone on the team can inspect `app.db`:
+Install both of these VS Code extensions:
 
-- **VS Code**: Install the "SQLite Viewer" extension, then click `app.db` in the file explorer
+- **SQLite Viewer** (Florian Klampfer) — click `app.db` in the file explorer and it opens as a spreadsheet. No SQL needed.
+- **SQLite** (alexcvzz) — write and run SQL queries. Open the command palette (`Cmd+Shift+P`), run "SQLite: Open Database", select `app.db`. A "SQLITE EXPLORER" section appears at the bottom of the Explorer sidebar. Right-click a table to view data or write queries. Run queries with `Cmd+Shift+Q`.
+
+Other options:
+
 - **Desktop app**: Download DB Browser for SQLite (free) from sqlitebrowser.org
 - **Python**: `pd.read_sql("SELECT * FROM tablename", sqlite3.connect("app.db"))`
 
