@@ -130,7 +130,7 @@ Create a new notebook in `notebooks/` and run:
 
 ```python
 import sqlite3, pandas as pd
-conn = sqlite3.connect("../app.db")
+conn = sqlite3.connect("../../app.db")
 df = pd.read_sql("SELECT * FROM example", conn)
 conn.close()
 df
